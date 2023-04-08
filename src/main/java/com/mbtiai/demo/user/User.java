@@ -20,41 +20,21 @@ public class User   {
     @Column(name = "user_id", unique = true, nullable = false)
     private Long user_id;
 
-    @Column
-    private float e_per;
 
     @Column
-    private float i_per;
+    private String email;
 
     @Column
-    private float n_per;
+    private String password;
 
     @Column
-    private float s_per;
-
-    @Column
-    private float t_per;
-
-    @Column
-    private float f_per;
-
-    @Column
-    private float p_per;
-
-    @Column
-    private float j_per;
+    private String nickname;
 
     @Builder
-    public User(float e_per, float i_per, float n_per, float s_per, float t_per, float f_per, float p_per, float j_per){
-        this.e_per = e_per;
-        this.i_per = i_per;
-        this.n_per = n_per;
-        this.s_per = s_per;
-        this.t_per = t_per;
-        this.f_per = f_per;
-        this.p_per = p_per;
-        this.j_per = j_per;
-
+    public User(String email, String password, String nickname){
+        this.email = email;
+        this.password = password;
+        this.nickname = nickname;
     }
 
 }
