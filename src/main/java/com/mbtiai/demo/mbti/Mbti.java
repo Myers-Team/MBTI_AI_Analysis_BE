@@ -54,6 +54,8 @@ public class Mbti {
         this.f_per = f_per;
         this.p_per = p_per;
         this.j_per = j_per;
-
     }
+
+
 }
+
