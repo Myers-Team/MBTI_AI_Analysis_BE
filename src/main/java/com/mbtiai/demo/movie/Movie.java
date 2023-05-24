@@ -1,6 +1,8 @@
 package com.mbtiai.demo.movie;
 
+import com.mbtiai.demo.contents.Contents;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -27,4 +29,15 @@ public class Movie {
     @Column
     private int m_hate;
 
+    @ManyToOne
+    @JoinColumn(name = "contents_id")
+    private Contents contents;
+
+    @Builder
+    public Movie(String movie_name, int m_like, int m_hate, Contents contents) {
+        this.movie_name = movie_name;
+        this.m_like = m_like;
+        this.m_hate = m_hate;
+        this.contents = contents;
+    }
 }

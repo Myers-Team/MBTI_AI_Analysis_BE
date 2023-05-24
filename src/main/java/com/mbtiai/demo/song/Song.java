@@ -1,6 +1,8 @@
 package com.mbtiai.demo.song;
 
+import com.mbtiai.demo.contents.Contents;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -26,5 +28,18 @@ public class Song {
 
     @Column
     private int s_hate;
+
+    @ManyToOne
+    @JoinColumn(name = "contents_id")
+    private Contents contents;
+
+
+    @Builder
+    public Song(String song_name, int s_like, int s_hate, Contents contents) {
+        this.song_name = song_name;
+        this.s_like = s_like;
+        this.s_hate = s_hate;
+        this.contents = contents;
+    }
 
 }
