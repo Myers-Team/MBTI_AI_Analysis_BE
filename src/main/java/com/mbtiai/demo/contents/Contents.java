@@ -11,7 +11,6 @@ import javax.persistence.*;
 
 @Entity
 @Getter
-
 @AllArgsConstructor //비권장이지만 없으면 오류
 @Table(name = "contents")
 public class Contents {
@@ -21,8 +20,11 @@ public class Contents {
     @Column(name = "contents_id", unique = true, nullable = false)
     private Long contents_id;
 
-    @Builder
-    public Contents() {
+    @Column
+    private String tot_con;
 
+    @Builder
+    public Contents(String tot_con) {
+        this.tot_con=tot_con;
     }
 }
