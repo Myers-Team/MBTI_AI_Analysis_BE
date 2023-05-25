@@ -7,9 +7,7 @@ package com.mbtiai.demo.contents;
 
 //DTO는 로직을 갖고 있지 않는 순수한 데이터 객체이며, 일반적으로 getter/setter 메서드만을 가진다. 하지만 DTO는 단순히 데이터를 옮기는 용도이기 때문에 굳이 Setter를 이용해 값을 수정할 필요가 없이, 생성자만을 사용하여 값을 할당하는 게 좋다.
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 
@@ -17,6 +15,8 @@ import javax.validation.constraints.NotBlank;
 //RequestDto는 생성 및 수정 요청하는 것
 //사실상 이거는 이번플젝에서 호출될 일이 없음
 @Getter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ContentsRequestDto {
 
