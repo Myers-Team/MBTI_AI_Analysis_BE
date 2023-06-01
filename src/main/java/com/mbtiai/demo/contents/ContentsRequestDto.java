@@ -14,10 +14,7 @@ import javax.validation.constraints.NotBlank;
 //Client가 Controller에 요청을 보낼 때 RequestDto의 형식으로 데이터가 이동
 //RequestDto는 생성 및 수정 요청하는 것
 //사실상 이거는 이번플젝에서 호출될 일이 없음
-@Getter
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+
 public class ContentsRequestDto {
 
     @NotBlank(message = "???을 입력하세요")
@@ -26,7 +23,7 @@ public class ContentsRequestDto {
     public Contents toEntity(){
         return Contents.builder()
                 .tot_con(tot_con)
-                .build();
+               .build();
     }
 
 }
