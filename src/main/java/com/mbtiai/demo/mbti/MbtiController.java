@@ -1,23 +1,23 @@
 package com.mbtiai.demo.mbti;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/mbti/result")
+@RequiredArgsConstructor
+@RequestMapping("/mbti")
 public class MbtiController {
+
     private final MbtiService mbtiService;
 
-    public MbtiController(MbtiService mbtiService) {
-        this.mbtiService = mbtiService;
+    @PostMapping("/calculate")
+    public MbtiResponseDto calculateAndSaveMbti(@RequestBody MbtiRequestDto requestDto) {
+        return mbtiService.calculateAndSaveMbti(requestDto);
     }
 
-    @PostMapping
-    public ResponseEntity<MbtiResponseDto> calculateMbti(@RequestBody MbtiRequestDto requestDto) {
-        MbtiResponseDto mbti = mbtiService.calculateMbti(requestDto);
-        return ResponseEntity.ok(mbti);
+    @GetMapping("/result/{userId}")
+    public MbtiResponseDto getMbtiResult(@PathVariable Long userId) {
+        return mbtiService.getMbti(userId);
     }
 }

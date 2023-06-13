@@ -1,5 +1,7 @@
 package com.mbtiai.demo.mbti;
 
 public interface MbtiService {
-    MbtiResponseDto calculateMbti(MbtiRequestDto requestDto);
+    MbtiResponseDto calculateAndSaveMbti(MbtiRequestDto requestDto);
+
+    MbtiResponseDto getMbti(Long userId);
 }
