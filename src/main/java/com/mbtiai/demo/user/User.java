@@ -1,6 +1,7 @@
 package com.mbtiai.demo.user;
 
 
+import com.mbtiai.demo.common.BaseTimeEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,6 +15,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
 
 @Entity
 @Getter

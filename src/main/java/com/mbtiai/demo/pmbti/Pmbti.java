@@ -1,5 +1,6 @@
 package com.mbtiai.demo.pmbti;
 
+import com.mbtiai.demo.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 
+@Builder
 @Entity
 @Getter
 @NoArgsConstructor
@@ -44,8 +46,13 @@ public class Pmbti {
     @Column
     private float p_j_per;
 
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+
     @Builder
-    public Pmbti(float p_e_per, float p_i_per, float p_n_per, float p_s_per, float p_t_per, float p_f_per, float p_p_per, float p_j_per){
+    public Pmbti(float p_e_per, float p_i_per, float p_n_per, float p_s_per, float p_t_per, float p_f_per, float p_p_per, float p_j_per, User user){
         this.p_e_per = p_e_per;
         this.p_i_per = p_i_per;
         this.p_n_per = p_n_per;
@@ -54,6 +61,8 @@ public class Pmbti {
         this.p_f_per = p_f_per;
         this.p_p_per = p_p_per;
         this.p_j_per = p_j_per;
+        this.user = user;
+
 
     }
 }
