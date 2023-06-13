@@ -11,6 +11,8 @@ import javax.persistence.*;
 
 @Entity
 @Getter
+@Builder
+@NoArgsConstructor
 @AllArgsConstructor //비권장이지만 없으면 오류
 @Table(name = "contents")
 public class Contents {
