@@ -16,6 +16,7 @@ public class UserController {
     @PostMapping("/user")
     @ResponseStatus(HttpStatus.OK)
     public Long signup(@RequestBody UserSignUpRequestDto request){
+
         return userService.signUp(request);
     }
 

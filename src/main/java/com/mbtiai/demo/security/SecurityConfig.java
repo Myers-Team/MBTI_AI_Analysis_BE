@@ -14,6 +14,7 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 
 //@RequiredArgsConstructor
@@ -51,16 +52,16 @@ public class SecurityConfig {
     @Bean
     @Order(SecurityProperties.BASIC_AUTH_ORDER)
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.csrf().disable();
         http
                 .formLogin().disable()
                 .httpBasic().disable()
                 .cors().disable()
-                .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/user/signup", "/user/signin").permitAll()
-                .antMatchers("/user").hasRole("USER")
+                .antMatchers("/user/signup", "/user/signin", "/", "/user/user", "/**").permitAll()
+                .antMatchers("/user").hasRole("USER") // 권한이 필요 -> Role에서 Authority로 변경
                 .anyRequest().authenticated();
 
         return http.build();
@@ -70,6 +71,8 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
+
+
 
 }
 
