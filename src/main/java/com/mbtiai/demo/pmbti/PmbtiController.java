@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/mbti")
+@RequestMapping("/pmbti")   //임시로
 public class PmbtiController {
 
     private final PmbtiService pmbtiService;

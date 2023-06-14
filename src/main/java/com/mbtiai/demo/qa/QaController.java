@@ -1,28 +1,30 @@
 package com.mbtiai.demo.qa;
 
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 public class QaController {
     private final QaService qaService;
 
-    public QaController(QaService qaService) {
-        this.qaService = qaService;
+    @GetMapping("/stats")
+    public List<QaResponseDto> getAllQas() {
+        return qaService.getAllQas();
+    }
+
+    @GetMapping("/mbti/test/personal")
+    public QaResponseDto getQuestionFromFlask() {
+        return qaService.getQuestionFromFlask();
     }
 
     @PostMapping("/mbti/test/personal")
-    public ResponseEntity<QaResponseDto> createQa(@RequestBody QaRequestDto requestDto) {
-        return ResponseEntity.ok(qaService.createQa(requestDto));
-    }
-
-    @GetMapping("/stats")
-    public ResponseEntity<List<QaResponseDto>> getQaList() {
-        return ResponseEntity.ok(qaService.getQaList());
+    public QaResponseDto sendAnswerAndGetNextQuestion(@RequestBody QaRequestDto requestDto) {
+        return qaService.sendAnswerAndGetNextQuestion(requestDto);
     }
 }
+
