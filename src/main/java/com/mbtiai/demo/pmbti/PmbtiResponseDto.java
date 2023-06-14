@@ -6,7 +6,6 @@ import lombok.Getter;
 @Getter
 @Builder
 public class PmbtiResponseDto {
-
     private float p_e_per;
     private float p_i_per;
     private float p_n_per;

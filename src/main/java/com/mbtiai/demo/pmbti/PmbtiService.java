@@ -1,5 +1,7 @@
 package com.mbtiai.demo.pmbti;
 
+
 public interface PmbtiService {
-    PmbtiResponseDto calculatePmbti(PmbtiRequestDto requestDto);
+    PmbtiResponseDto calculateAndSavePmbti(PmbtiRequestDto requestDto);
+    PmbtiResponseDto getPmbti(Long userId);
 }
