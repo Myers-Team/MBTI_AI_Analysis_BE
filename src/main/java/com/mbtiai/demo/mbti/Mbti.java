@@ -52,7 +52,7 @@ public class Mbti {
     private User user;
 
     @Builder
-    public Mbti(float e_per, float i_per, float n_per, float s_per, float t_per, float f_per, float p_per, float j_per){
+    public Mbti(float e_per, float i_per, float n_per, float s_per, float t_per, float f_per, float p_per, float j_per, User user){
         this.e_per = e_per;
         this.i_per = i_per;
         this.n_per = n_per;
