@@ -32,24 +32,12 @@ public class QaServiceImpl implements QaService {
         User user = userRepository.findById(requestDto.getUser_id())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + requestDto.getUser_id()));
         Qa qa = qaRepository.save(requestDto.toEntity(user));
-
-        // Send user's answer to Flask server
-        String url = "http://203.253.21.178:5000/TF";
-        webClientBuilder.build()
-                .post()
-                .uri(url)
-                .contentType(MediaType.APPLICATION_JSON)
-                .body(BodyInserters.fromValue(qa))
-                .retrieve()
-                .bodyToMono(Void.class)
-                .block();
-
         return QaResponseDto.fromEntity(qa);
     }
 
     @Override
     public QaResponseDto getQuestionFromFlask() {
-        String url = "질문 하나 받아오는 링크"; // Flask server's URL to get the question
+        String url = "http://203.253.21.178:5000/question"; // Flask server's URL to get the question
         QaResponseDto response = webClientBuilder.build()
                 .get()
                 .uri(url)
@@ -62,7 +50,7 @@ public class QaServiceImpl implements QaService {
     @Override
     public QaResponseDto sendAnswerAndGetNextQuestion(QaRequestDto requestDto) {
         // Send user's answer to Flask server
-        String url = "플라스크로 답변을 보내는 것";
+        String url = "http://203.253.21.178:5000/evaluateandquestion";
         webClientBuilder.build()
                 .post()
                 .uri(url)
