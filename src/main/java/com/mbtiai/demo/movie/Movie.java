@@ -34,11 +34,25 @@ public class Movie {
     @JoinColumn(name = "contents_id")
     private Contents contents;
 
+    @Column
+    private int likeCount = 0;
+
+    @Column
+    private int dislikeCount = 0;
+
     @Builder
     public Movie(String movie_name, int m_like, int m_hate, Contents contents) {
         this.movie_name = movie_name;
         this.m_like = m_like;
         this.m_hate = m_hate;
         this.contents = contents;
+    }
+
+    public void incrementLikeCount() {
+        this.likeCount++;
+    }
+
+    public void incrementDislikeCount() {
+        this.dislikeCount++;
     }
 }

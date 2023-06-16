@@ -1,6 +1,8 @@
 package com.mbtiai.demo.contents;
 
 
+import com.mbtiai.demo.movie.MovieResponseDto;
+import com.mbtiai.demo.song.SongResponseDto;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -8,11 +10,11 @@ import lombok.Getter;
 @Builder
 @Getter
 public class ContentsResponseDto {
-    private String tot_con;
+    private MovieResponseDto movie;
+    private SongResponseDto song;
 
-    public static ContentsResponseDto fromEntity(Contents contents) {
-        return ContentsResponseDto.builder()
-                .tot_con(contents.getTot_con())
-                .build();
+    public ContentsResponseDto(MovieResponseDto movie, SongResponseDto song) {
+        this.movie = movie;
+        this.song = song;
     }
 }

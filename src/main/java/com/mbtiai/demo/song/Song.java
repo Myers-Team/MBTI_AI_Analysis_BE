@@ -30,6 +30,13 @@ public class Song {
     @Column
     private int s_hate;
 
+
+    @Column
+    private int likeCount = 0;
+
+    @Column
+    private int dislikeCount = 0;
+
     @ManyToOne
     @JoinColumn(name = "contents_id")
     private Contents contents;
@@ -41,6 +48,14 @@ public class Song {
         this.s_like = s_like;
         this.s_hate = s_hate;
         this.contents = contents;
+    }
+
+    public void incrementLikeCount() {
+        this.likeCount++;
+    }
+
+    public void incrementDislikeCount() {
+        this.dislikeCount++;
     }
 
 }
