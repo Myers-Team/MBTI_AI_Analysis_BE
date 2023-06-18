@@ -13,15 +13,10 @@ import java.util.Map;
 public class UserController {
     private final UserService userService;
 
-    @PostMapping("/user")
+    @PostMapping("/signup")
     @ResponseStatus(HttpStatus.OK)
     public Long signup(@RequestBody UserSignUpRequestDto request){
 
         return userService.signUp(request);
     }
-
-//    @PostMapping("/signUp")
-//        public String signin(@RequestBody Map<String, String > user){
-//        return userService.signin(user);
-//    }
 }

@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Long signUp(UserSignUpRequestDto requestDto) {
         if (userRepository.findByEmail(requestDto.getEmail()).isPresent()) {
-            throw new IllegalArgumentException("존재하는 이메일입니다");
+            throw new IllegalArgumentException("이미 사용 중인 이메일입니다");
         }
 //        if(!requestDto.getPassword().equals(requestDto.getCheckedPassword())){
 //            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
@@ -32,11 +32,12 @@ public class UserServiceImpl implements UserService {
         return user.getUser_id();
     }
 
+    @Transactional
     @Override
     public String signin(UserSignInRequestDto requestDto) {
         User user = userRepository.findByEmail(requestDto.getEmail())
                 .orElseThrow(() -> new IllegalArgumentException("가입된 이메일이 아닙니다."));
-        //validateMatchedPassword(requestDto.getPassword(), user.getPassword());
+//        validateMatchedPassword(requestDto.getPassword(), user.getPassword());
 
         String role = user.getRole().name();
         return jwtTokenProvider.createToken(user.getUsername(), role);
