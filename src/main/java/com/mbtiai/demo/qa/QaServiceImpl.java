@@ -50,20 +50,27 @@ public class QaServiceImpl implements QaService {
     @Override
     public QaResponseDto sendAnswerAndGetNextQuestion(QaRequestDto requestDto) {
         // Send user's answer to Flask server
-        String url = "http://203.253.21.178:5000/evaluateandquestion";
+        String evaluateUrl = "http://203.253.21.178:5000/evaluateandquestion";
         webClientBuilder.build()
                 .post()
-                .uri(url)
+                .uri(evaluateUrl)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(BodyInserters.fromValue(requestDto))
                 .retrieve()
                 .bodyToMono(Void.class)
                 .block();
 
+        // Save the current question, answer, emd_v, and user_id to the database
+        User user = userRepository.findById(requestDto.getUser_id())
+                .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + requestDto.getUser_id()));
+        Qa qa = requestDto.toEntity(user);
+        qaRepository.save(qa);
+
         // After sending the answer, get the next question
+        String questionUrl = "http://203.253.21.178:5000/question";
         QaResponseDto response = webClientBuilder.build()
                 .get()
-                .uri(url)
+                .uri(questionUrl)
                 .retrieve()
                 .bodyToMono(QaResponseDto.class)
                 .block();
@@ -71,6 +78,7 @@ public class QaServiceImpl implements QaService {
         return response;
     }
 
+    //df
     @Override
     public List<QaResponseDto> getAllQas() {
         List<Qa> qas = qaRepository.findAll();

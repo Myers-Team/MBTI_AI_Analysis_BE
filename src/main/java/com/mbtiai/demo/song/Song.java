@@ -32,10 +32,10 @@ public class Song {
 
 
     @Column
-    private int likeCount = 0;
+    private Integer likeCount = 0;
 
     @Column
-    private int dislikeCount = 0;
+    private Integer dislikeCount = 0;
 
     @ManyToOne
     @JoinColumn(name = "contents_id")
@@ -43,11 +43,13 @@ public class Song {
 
 
     @Builder
-    public Song(String song_name, int s_like, int s_hate, Contents contents) {
+    public Song(String song_name, int s_like, int s_hate, Contents contents, Integer likeCount,Integer dislikeCount) {
         this.song_name = song_name;
         this.s_like = s_like;
         this.s_hate = s_hate;
         this.contents = contents;
+        this.dislikeCount = dislikeCount;
+        this.likeCount = likeCount;
     }
 
     public void incrementLikeCount() {

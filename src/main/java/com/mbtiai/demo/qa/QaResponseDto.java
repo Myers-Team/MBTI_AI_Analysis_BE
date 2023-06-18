@@ -2,10 +2,12 @@ package com.mbtiai.demo.qa;
 
 
 
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 
 @Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class QaResponseDto {
 

@@ -35,17 +35,19 @@ public class Movie {
     private Contents contents;
 
     @Column
-    private int likeCount = 0;
+    private Integer likeCount = 0;
 
     @Column
-    private int dislikeCount = 0;
+    private Integer dislikeCount = 0;
 
     @Builder
-    public Movie(String movie_name, int m_like, int m_hate, Contents contents) {
+    public Movie(String movie_name, int m_like, int m_hate, Contents contents, Integer likeCount, Integer dislikeCount) {
         this.movie_name = movie_name;
         this.m_like = m_like;
         this.m_hate = m_hate;
         this.contents = contents;
+        this.dislikeCount = dislikeCount;
+        this.likeCount = likeCount;
     }
 
     public void incrementLikeCount() {
