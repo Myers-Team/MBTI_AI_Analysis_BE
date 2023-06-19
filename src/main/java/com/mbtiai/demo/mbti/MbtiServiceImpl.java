@@ -23,7 +23,7 @@ public class MbtiServiceImpl implements MbtiService {
     @Transactional
     public MbtiResponseDto calculateAndSaveMbti(MbtiRequestDto requestDto) {
         //flask 서버 url(아무렇게 넣어놓음)
-        String url = "최종 수치 받아오는 링크";
+        String url = "http://203.253.21.178:5000/evaluatelast";
 
         //flask서버에 POST요청을 보내고 응답받음
         MbtiResponseDto response = webClientBuilder.build()
