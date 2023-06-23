@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/pmbti")   //임시로
 public class PmbtiController {
 
+    /*
     private final PmbtiService pmbtiService;
 
     @PostMapping("/calculate")
@@ -22,5 +23,7 @@ public class PmbtiController {
     public PmbtiResponseDto getPmbtiResult(@PathVariable Long userId) {
         return pmbtiService.getPmbti(userId);
     }
+
+     */
 }
 

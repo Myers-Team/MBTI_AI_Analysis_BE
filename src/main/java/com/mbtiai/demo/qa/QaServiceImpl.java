@@ -26,6 +26,9 @@ public class QaServiceImpl implements QaService {
         this.webClientBuilder = webClientBuilder;
     }
 
+
+
+
     @Override
     @Transactional
     public QaResponseDto saveQa(QaRequestDto requestDto) {

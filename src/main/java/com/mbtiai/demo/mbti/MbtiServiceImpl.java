@@ -22,26 +22,23 @@ public class MbtiServiceImpl implements MbtiService {
     @Override
     @Transactional
     public MbtiResponseDto calculateAndSaveMbti(MbtiRequestDto requestDto) {
-        //flask 서버 url(아무렇게 넣어놓음)
+        // flask 서버 url(아무렇게 넣어놓음)
         String url = "http://203.253.21.178:5000/evaluatelast";
 
-        //flask서버에 POST요청을 보내고 응답받음
         MbtiResponseDto response = webClientBuilder.build()
-                .post()
+                .post() // Change get to post
                 .uri(url)
-                .contentType(MediaType.APPLICATION_JSON)
-                .body(BodyInserters.fromValue(requestDto))
+                .bodyValue(requestDto)  // Add this line to include request body
                 .retrieve()
                 .bodyToMono(MbtiResponseDto.class)
-                .block();  // block() 메소드를 사용하여 결과를 받아옴. 주의: block()은 비동기 작업을 동기 작업으로 만들어버리므로 적절히 사용해야 함.
+                .block();
 
-        //응답받은 데이터를 MBTI객체로 저장
+        // 응답받은 데이터를 MBTI객체로 저장
         User user = userRepository.findById(requestDto.getUser_id())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + requestDto.getUser_id()));
         Mbti mbti = mbtiRepository.save(requestDto.toEntity(user));
         return MbtiResponseDto.fromEntity(mbti);
     }
-
     @Override
     @Transactional(readOnly = true)
     public MbtiResponseDto getMbti(Long userId) {
